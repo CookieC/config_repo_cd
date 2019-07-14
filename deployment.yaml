@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hello_flux_test
+  labels:
+    app: hello_flux_test
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: hello_flux_test
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: hello_flux_test
+          image: registry.sensetime.com/infraservice/hello_flux_test:master-05f26b1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              cpu: 10m
+              memory: 30Mi
+            requests:
+              cpu: 10m
+              memory: 30Mi
+      terminationGracePeriodSeconds: 30
