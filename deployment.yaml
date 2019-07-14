@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: hello_flux_test
+  namespace: hello_flux_test
   labels:
     app: hello_flux_test
 spec:
@@ -19,7 +20,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: hello_flux_test
-          image: registry.sensetime.com/infraservice/hello_flux_test:master-05f26b1
+          image: quay.io/cookiec/hello_flux_test:master-3de47e54
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
